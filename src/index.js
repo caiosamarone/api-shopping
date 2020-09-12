@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import HomeView from './views/Home.view.jsx'
 
-  function App(){
+  /*function App(){
     return <div>
       Ola, mundo
     </div>
-  }
+  }*/
 ReactDOM.render(
   <React.StrictMode>
     <HomeView/>
