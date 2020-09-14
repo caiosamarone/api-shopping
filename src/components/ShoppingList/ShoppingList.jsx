@@ -11,9 +11,10 @@ function ShoppingList({title, products, onToggle}){
             {                     /**as chaves denotam que o conteúdo é dinâmico */
                 products.map((product) => 
                     <Checkbox
-                     value={product.checked} 
-                     title={product.name} 
-                     onClick={() => onToggle(product.id, product.checked,product.name)}
+                        key={product.id}
+                        value={product.checked} 
+                        title={product.name} 
+                        onClick={() => onToggle(product.id, product.checked,product.name)}
                      />)    /**iterando por todos produtos, e pra cada um criando um CB */
             }
             
