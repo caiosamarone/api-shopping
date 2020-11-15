@@ -4,49 +4,25 @@ import { Wrapper, Container } from "./App.styles";
 import AppContainer from "../AppContainer";
 import LineChart from "../../shared/LineChart/LineChart";
 import ShoppingList from "../ShoppingList";
-import productsMock from "../mocks/products.json";
 import extractPercentage from "../../utils/extractPercentage";
 import Calculator from "../Calculator";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectAllProducts,
+  selectSelectedProducts,
+  selectTotal,
+} from "../../store/selectors/selectorProducts";
+import { toggleProduct } from "../../store/actions/products";
 
 function App() {
+  const dispatch = useDispatch();
   const colors = ["#62CBC6", "#00ABAD", "#00858C", "#006073", "#004D61"];
-  const [products, setProducts] = useState(
-    productsMock.products
-  ); /**setando os produtos que estao no arquivo JSON     */
-  const [selectedProducts, setSelectedProducts] = useState([]);
-  const [totalPrice, setTotalPrice] = useState([0]);
+  const products = useSelector(selectAllProducts);
+  const selectedProducts = useSelector(selectSelectedProducts);
+  const totalPrice = useSelector(selectTotal);
 
-  useEffect(() => {
-    //toda vez que um evento é criado, chama essa funcao de callback
-    const newSelectedProducts = products.filter((product) => product.checked);
-    setSelectedProducts(newSelectedProducts);
-  }, [products]);
-
-  useEffect(() => {
-    const total = selectedProducts
-      .map((product) => product.price)
-      .reduce((a, b) => a + b, 0);
-
-    setTotalPrice(total);
-  }, [selectedProducts]);
-
-  function handleToggle(id, checked, name) {
-    const newProducts = products.map((product) => {
-      /*   if (product.id == id){
-                return {
-                ...product, checked: !product.checked
-                }
-            }
-            else {
-                return product 
-            }
-            */
-      // if ternário substitui o codigo acima
-      return product.id === id
-        ? { ...product, checked: !product.checked }
-        : product;
-    });
-    setProducts(newProducts);
+  function handleToggle(id) {
+    dispatch(toggleProduct(id));
   }
 
   return (
