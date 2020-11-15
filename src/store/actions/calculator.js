@@ -1,7 +1,7 @@
 export function sum(a,b)
 {
     return {
-        type = 'SUM',
+        type : 'SUM',
         payload: [a,b]
     }
 }
@@ -9,7 +9,7 @@ export function sum(a,b)
 export function sub(a,b)
 {
     return {
-        type = 'SUB',
+        type : 'SUB',
         payload: [a,b]
     }
 }
